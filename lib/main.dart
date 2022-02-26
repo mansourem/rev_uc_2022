@@ -91,16 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(children: <Widget>[
-            const Text(
-              'Wallet:',
-              textAlign: TextAlign.start,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          //mainAxisAlignment: MainAxisAlignment.center,
 
-            ),
         Container(
+          width: 100,
+          //height: 100,
           margin: EdgeInsets.all(25),
           child: TextButton(
             child: Text(
@@ -110,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {},
           ),
         ),
-        Container(
+          Container(
           margin: EdgeInsets.all(25),
           child: TextButton(
             child: Text(
@@ -122,6 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: _incrementCounter_50,
           ),
         ),
+          const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),
+          const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),
+          const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),const Text('',),
+          RichText(
+            text: TextSpan(
+              text: 'Wallet: ',
+                style: TextStyle(color: Colors.black, fontSize: 40),
+                children: <TextSpan>[
+                  TextSpan(text: '$_counter',
+                      style: TextStyle(color: Colors.black, fontSize: 40)
+                  )
+                ]
+            ),
+          ),
         ]),
 
       ),
@@ -147,4 +156,3 @@ class _MyHomePageState extends State<MyHomePage> {
 // center the children vertically; the main axis here is the vertical
 // axis because Columns are vertical (the cross axis would be
 // horizontal).
-//mainAxisAlignment: MainAxisAlignment.center,
