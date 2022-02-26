@@ -185,6 +185,11 @@ class Spending extends StatefulWidget{
   }
 }
 class _SpendingState extends State<Spending>{
+  void spend5() {
+  setState(() {
+  globals.wallet-=5;
+  });
+}
   @override
   Widget build (BuildContext context) {
     return Scaffold(
@@ -202,7 +207,23 @@ class _SpendingState extends State<Spending>{
           },
         ),
       ),
-      body: const Text("Rewards!"),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Text('',),
+            const Text('Lets Start Spending!',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('TV Time!'),
+                onPressed: spend5,
+              ),
+            ),
+            Text('Earned: ${globals.wallet}')
+          ],
+        ),
+      ),
     );
   }
 }
