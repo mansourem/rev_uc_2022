@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-  initialRoute: '/',
-  routes:{
-    '/': (context) => HomeRoute(),
-    '/second': (context) => Savings(),
-    '/third': (context) => Earnings(),
-    '/fourth': (context) => Spending(),
-  },
+    initialRoute: '/',
+    routes:{
+      '/': (context) => HomeRoute(),
+      '/second': (context) => Savings(),
+      '/third': (context) => Earnings(),
+      '/fourth': (context) => Spending(),
+    },
   ));
   double wallet=0;
 }
 
 class HomeRoute extends StatelessWidget {
+  const HomeRoute({Key? key}) : super(key: key);
+
   @override
   Widget build (BuildContext context){
     return Scaffold(
@@ -24,24 +26,42 @@ class HomeRoute extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-        ElevatedButton(
-        child: const Text('Savings'),
-          onPressed: () {
-            Navigator.pushNamed(context,'/second');
-          },
-        ),
-            ElevatedButton(
-              child: const Text('Earnings'),
-              onPressed: () {
-                Navigator.pushNamed(context,'/third');
-              },
+            const Text('',),
+            SizedBox(
+              width: 400.0,
+              height: 200.0,
+              child: ElevatedButton(
+                child: const Text('Savings'),
+                onPressed: () {
+                  Navigator.pushNamed(context,'/second');
+                },
+              ),
             ),
-            ElevatedButton(
-              child: const Text('Spending'),
-              onPressed: () {
-                Navigator.pushNamed(context,'/fourth');
-              },
+            const Text('',),
+
+            SizedBox(
+              width: 400.0,
+              height: 200.0,
+              child: ElevatedButton(
+                child: const Text('Earnings'),
+                onPressed: () {
+                  Navigator.pushNamed(context,'/third');
+                },
+              ),
             ),
+            const Text('',),
+
+            SizedBox(
+              width: 400.0,
+              height: 200.0,
+              child: ElevatedButton(
+                child: const Text('Spending'),
+                onPressed: () {
+                  Navigator.pushNamed(context,'/fourth');
+                },
+              ),
+            ),
+
           ],
         ),
       ),
