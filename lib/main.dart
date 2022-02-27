@@ -15,7 +15,15 @@ void main() {
   ));
 
 }
-
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeRoute(),
+    );
+  }
+}
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -41,7 +49,21 @@ class _HomeRouteState extends State<HomeRoute>{
       body: Center(
         child: Column(
           children: <Widget>[
-
+             ElevatedButton(
+              child: Text(
+                'Show Pop-up',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              //color: Colors.black,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => _buildPopupDialog(context),
+                );
+              },
+            ),
             const Text('',),
             SizedBox(
               width: 400.0,
@@ -53,7 +75,7 @@ class _HomeRouteState extends State<HomeRoute>{
                 },
               ),
             ),
-            const Text('',),
+            const Text('', style: TextStyle(fontSize: 10.0)),
 
             SizedBox(
               width: 400.0,
@@ -65,7 +87,7 @@ class _HomeRouteState extends State<HomeRoute>{
                 },
               ),
             ),
-            const Text('',),
+            const Text('', style: TextStyle(fontSize: 10.0)),
 
             SizedBox(
               width: 400.0,
@@ -86,7 +108,27 @@ class _HomeRouteState extends State<HomeRoute>{
     );
   }
 }
-
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Popup example'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Hello"),
+      ],
+    ),
+    actions: <Widget>[
+      new TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        //textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
 class Savings extends StatefulWidget{
   @override
   State<StatefulWidget> createState(){
