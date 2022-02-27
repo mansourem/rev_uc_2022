@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 180),
-            Text("Firebase demo",
+            Text("Money Earn Save",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 3,
                                   fontSize: 16.0);
-                              Navigator.pushNamed(context,'/');
+                              Navigator.pushNamed(context,'/home');
 
                             } on FirebaseAuthException catch (e) {
                               Fluttertoast.showToast(
