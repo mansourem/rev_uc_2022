@@ -68,8 +68,9 @@ class _HomeRouteState extends State<HomeRoute>{
                 },
               ),
             ),
-            Text('Amount Earned: ${globals.wallet}'),
-            Text('Amount Saved: ${globals.savings}')
+            Text(''),
+            Text('Amount Earned: \$${globals.wallet}', style: TextStyle(fontSize: 24.0)),
+            Text('Amount Saved: \$${globals.savings}', style: TextStyle(fontSize: 24.0))
           ],
         ),
       ),
@@ -120,7 +121,8 @@ class _SavingsState extends State<Savings>{
                 labelText: 'Save Amount',
               ),
             ),
-            const Text('Lets Start Saving!',),
+            const Text('',),
+            const Text('Let\'s Start Saving!', style: TextStyle(fontSize: 20.0)),
             SizedBox(
               width: 400.0,
               height: 100.0,
@@ -132,7 +134,7 @@ class _SavingsState extends State<Savings>{
                 }
               ),
             ),
-            Text('Savings: ${globals.savings}')
+            Text('Savings: \$${globals.savings}')
           ],
         ),
       ),
@@ -173,16 +175,34 @@ class _EarningsState extends State<Earnings>{
         child: Column(
           children: <Widget>[
             const Text('',),
-            const Text('Lets Start Saving!',),
+            const Text('Let\'s Earn Some Money!', style: TextStyle(fontSize: 20.0)),
             SizedBox(
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('Take Out The Trash'),
+                child: const Text('\$5    Take Out The Trash'),
                 onPressed: earn5,
               ),
             ),
-            Text('Earned: ${globals.wallet}')
+            const Text('',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('\$5    Mop the Floor'),
+                onPressed: earn5,
+              ),
+            ),
+            const Text('',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('\$5    Do Something'),
+                onPressed: earn5,
+              ),
+            ),
+            Text('Earned: \$${globals.wallet}')
           ],
         ),
       ),
@@ -214,7 +234,15 @@ class _SpendingState extends State<Spending>{
           },
         ),
       ),
-      body: const Text("Rewards!"),
+    body: Center(
+    child: Column(
+    children: <Widget>[
+    const Text('',),
+    const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
+    Text('Earned: \$${globals.wallet}')
+    ],
+    ),
+    ),
     );
   }
 }
