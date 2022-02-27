@@ -16,9 +16,10 @@ void main() async{
     initialRoute: '/',
     routes:{
       '/': (context) => LoginPage(),
-      '/second': (context) => const Savings(),
-      '/third': (context) => const Earnings(),
-      '/fourth': (context) => const Spending(),
+      '/home': (context) => HomeRoute(),
+      '/second': (context) => Savings(),
+      '/third': (context) => Earnings(),
+      '/fourth': (context) => Spending(),
       '/fifth':(context) => Info(),
     },
   ));
@@ -125,6 +126,7 @@ class Savings extends StatefulWidget{
     return _SavingsState();
   }
 }
+
 class _SavingsState extends State<Savings>{
   void save(amount) {
     double amountDiff = globals.wallet - amount;
@@ -152,7 +154,7 @@ class _SavingsState extends State<Savings>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -227,7 +229,7 @@ class _EarningsState extends State<Earnings>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -311,7 +313,7 @@ class _SpendingState extends State<Spending>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -367,7 +369,7 @@ class Info extends StatelessWidget{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
