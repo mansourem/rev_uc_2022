@@ -1,13 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:parent_kids_finance/auth.dart';
+import 'firebase_options.dart';
 import 'global_wallet.dart' as globals;
 import 'info_text.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  print('-- WidgetsFlutterBinding.ensureInitialized');
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  print('-- main: Firebase.initializeApp');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes:{
-      '/': (context) => HomeRoute(),
+      '/': (context) => LoginPage(),
       '/second': (context) => Savings(),
       '/third': (context) => Earnings(),
       '/fourth': (context) => Spending(),
@@ -312,25 +320,46 @@ class _InfoState extends State<Info>{
           },
         ),
       ),
-      body: Center(
+      body: Padding (
+        padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text('',),
-            const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
-            Text('Earned: \$${globals.wallet}'),
+            const Text('',textAlign: TextAlign.center,),
+            const Text('Rewards!', style: TextStyle(fontSize: 20.0, ),textAlign: TextAlign.center,),
+            Text('Earned: \$${globals.wallet}', textAlign: TextAlign.center,),
+            const Text('',textAlign: TextAlign.center,),
 
-            Expanded(child: Text(heading1, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child: Text(heading1, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),maxLines: 4, overflow: TextOverflow.ellipsis),),
             Expanded(child: Text(heading1_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis,),),
-            Expanded(child: Text(heading2, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child: Text(heading2_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.clip,),),
-            Expanded(child:Text(heading2_body2, style: TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading2_body3, style: TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading3, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading3_body1, style: TextStyle(fontSize: 20, ),),),
+            const Text('',textAlign: TextAlign.center,),
+            Expanded(child: Text(heading2, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child: Text(heading2_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis,),),
+            Expanded(child:Text(heading2_body2, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading2_body3, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading2_body4, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading2_body5, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading2_body6, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading2_body7, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            const Text('',textAlign: TextAlign.center,),
+            Expanded(child:Text(heading3, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis, maxLines: 3,),),
+            Expanded(child:Text(heading3_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading3_body2, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            const Text('',textAlign: TextAlign.center,),
             Expanded(child:Text(heading4, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading4_body1, style: TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading5, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading5_body1, style: TextStyle(fontSize: 20, ),),)
+            Expanded(child:Text(heading4_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            const Text('',textAlign: TextAlign.center,),
+            Expanded(child:Text(heading5, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading5_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            const Text('',textAlign: TextAlign.center,),
+            Expanded(child:Text(heading6, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading6_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            const Text('',textAlign: TextAlign.center,),
+            Expanded(child:Text(heading7, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading7_body1, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading7_body2, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+            Expanded(child:Text(heading7_body3, style: TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis),),
+
           ],
         ),
       ),
