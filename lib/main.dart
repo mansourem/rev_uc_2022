@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'global_wallet.dart' as globals;
+import 'info_text.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes:{
-      '/': (context) => HomeRoute(),
-      '/second': (context) => Savings(),
-      '/third': (context) => Earnings(),
-      '/fourth': (context) => Spending(),
-      '/fifth':(context) => Info(),
+      '/': (context) => const HomeRoute(),
+      '/second': (context) => const Savings(),
+      '/third': (context) => const Earnings(),
+      '/fourth': (context) => const Spending(),
+      '/fifth':(context) => const Info(),
     },
   ));
 
 }
 class HomeRoute extends StatefulWidget {
+  const HomeRoute({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState(){
     return _HomeRouteState();
@@ -83,17 +86,40 @@ class _HomeRouteState extends State<HomeRoute>{
   }
 }
 
+Widget _buildPopupDialog(BuildContext context, value) {
+  return AlertDialog(
+    title: const Text('Money Tip'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Recommend Amount To Save: \$${value/2}"),
+      ],
+    ),
+    actions: <Widget>[
+       TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        //textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
+
 class Savings extends StatefulWidget{
+  const Savings({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState(){
     return _SavingsState();
   }
 }
-
 class _SavingsState extends State<Savings>{
-  void save5(amount) {
-    double amount_diff = globals.wallet - amount;
-    if (amount_diff >= 0)
+  void save(amount) {
+    double amountDiff = globals.wallet - amount;
+    if (amountDiff >= 0)
     {
       setState(() {
         globals.savings+=amount;
@@ -102,7 +128,7 @@ class _SavingsState extends State<Savings>{
     }
     else
     {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Amount"),));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Invalid Amount"),));
     }
   }
   TextEditingController saveAmount = TextEditingController();
@@ -144,29 +170,38 @@ class _SavingsState extends State<Savings>{
                 child: const Text('Save'),
                 onPressed: (){
                   double i=double.parse(saveAmount.text);
-                  save5(i);
+                  save(i);
                 }
               ),
             ),
-            Text('Savings: \$${globals.savings}')
+            const Text(''),
+            Text('Amount Earned: \$${globals.wallet}', style: const TextStyle(fontSize: 24.0)),
+            Text('Amount Saved: \$${globals.savings}', style: const TextStyle(fontSize: 24.0))
           ],
         ),
       ),
     );
   }
 }
+
 class Earnings extends StatefulWidget{
+  const Earnings({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState(){
     return _EarningsState();
   }
 }
-
 class _EarningsState extends State<Earnings>{
-  void earn5() {
+  earn(value) {
     setState(() {
-      globals.wallet+=5;
-    });
+      globals.wallet+=value;
+    },
+  );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => _buildPopupDialog(context,value),
+    );
   }
   @override
   Widget build (BuildContext context){
@@ -195,7 +230,8 @@ class _EarningsState extends State<Earnings>{
               height: 100.0,
               child: ElevatedButton(
                 child: const Text('\$5    Take Out The Trash'),
-                onPressed: earn5,
+                onPressed: (){
+                  earn(5);}
               ),
             ),
             const Text('',),
@@ -203,8 +239,9 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$5    Mop the Floor'),
-                onPressed: earn5,
+                child: const Text('\$10    Mop the Floor'),
+                onPressed: () {
+                  earn(10);}
               ),
             ),
             const Text('',),
@@ -212,11 +249,14 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$5    Do Something'),
-                onPressed: earn5,
+                child: const Text('\$2.50    Chore 3'),
+                onPressed: (){
+                  earn(2.5);}
               ),
             ),
-            Text('Earned: \$${globals.wallet}')
+            const Text(''),
+            Text('Amount Earned: \$${globals.wallet}', style: const TextStyle(fontSize: 24.0)),
+            Text('Amount Saved: \$${globals.savings}', style: const TextStyle(fontSize: 24.0))
           ],
         ),
       ),
@@ -225,6 +265,8 @@ class _EarningsState extends State<Earnings>{
 }
 
 class Spending extends StatefulWidget{
+  const Spending({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState(){
     return _SpendingState();
@@ -232,8 +274,8 @@ class Spending extends StatefulWidget{
 }
 class _SpendingState extends State<Spending>{
   void spend(amount) {
-    double amount_diff = globals.wallet - amount;
-    if (amount_diff >= 0)
+    double amountDiff = globals.wallet - amount;
+    if (amountDiff >= 0)
     {
       setState(() {
         globals.wallet-=amount;
@@ -241,7 +283,7 @@ class _SpendingState extends State<Spending>{
     }
     else
     {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Not Enough Earned"),));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Not Enough Earned"),));
     }
   }
   @override
@@ -266,9 +308,7 @@ class _SpendingState extends State<Spending>{
         children: <Widget>[
           const Text('',),
           const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
-          Text('Earned: \$${globals.wallet}'),
           const Text('',),
-          const Text('Lets Start Spending!',),
           SizedBox(
             width: 400.0,
             height: 100.0,
@@ -279,7 +319,20 @@ class _SpendingState extends State<Spending>{
                 },
             ),
           ),
-          Text('Earned: ${globals.wallet}')
+          const Text(''),
+          SizedBox(
+            width: 400.0,
+            height: 100.0,
+            child: ElevatedButton(
+              child: const Text('Dessert Treat! - \$10'),
+              onPressed: (){
+                spend(10);
+              },
+            ),
+          ),
+          const Text(''),
+          Text('Amount Earned: \$${globals.wallet}', style: const TextStyle(fontSize: 24.0)),
+          Text('Amount Saved: \$${globals.savings}', style: const TextStyle(fontSize: 24.0))
         ],
       ),
     ),
@@ -288,6 +341,8 @@ class _SpendingState extends State<Spending>{
 }
 
 class Info extends StatefulWidget{
+  const Info({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState(){
     return _InfoState();
@@ -312,13 +367,24 @@ class _InfoState extends State<Info>{
         ),
       ),
       body: Center(
-
         child: Column(
           children: <Widget>[
             const Text('',),
             const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
+            Text('Earned: \$${globals.wallet}'),
 
-            Text('Earned: \$${globals.wallet}')
+            Expanded(child: Text(heading1, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child: Text(heading1_body1, style: const TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis,),),
+            Expanded(child: Text(heading2, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child: Text(heading2_body1, style: const TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.clip,),),
+            Expanded(child:Text(heading2_body2, style: const TextStyle(fontSize: 20, ),),),
+            Expanded(child:Text(heading2_body3, style: const TextStyle(fontSize: 20, ),),),
+            Expanded(child:Text(heading3, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child:Text(heading3_body1, style: const TextStyle(fontSize: 20, ),),),
+            Expanded(child:Text(heading4, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child:Text(heading4_body1, style: const TextStyle(fontSize: 20, ),),),
+            Expanded(child:Text(heading5, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+            Expanded(child:Text(heading5_body1, style: const TextStyle(fontSize: 20, ),),)
           ],
         ),
       ),
