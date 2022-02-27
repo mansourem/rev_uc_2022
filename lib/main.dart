@@ -68,9 +68,8 @@ class _HomeRouteState extends State<HomeRoute>{
                 },
               ),
             ),
-            Text(''),
-            Text('Amount Earned:\$${globals.wallet}', style: TextStyle(fontSize: 24.0)),
-            Text('Amount Saved:\$${globals.savings}', style: TextStyle(fontSize: 24.0))
+            Text('Amount Earned: ${globals.wallet}'),
+            Text('Amount Saved: ${globals.savings}')
           ],
         ),
       ),
@@ -86,11 +85,12 @@ class Savings extends StatefulWidget{
 }
 
 class _SavingsState extends State<Savings>{
-  void save5() {
+  save5(value) {
     setState(() {
-      globals.savings+=5;
+      globals.savings+=value;
     });
   }
+  TextEditingController saveAmount = TextEditingController();
   @override
   Widget build (BuildContext context){
     return Scaffold(
@@ -112,16 +112,27 @@ class _SavingsState extends State<Savings>{
         child: Column(
           children: <Widget>[
             const Text('',),
-            const Text('Lets Start Saving!', style: TextStyle(fontSize: 20.0)),
+            TextField(
+              keyboardType: TextInputType.number,
+              controller: saveAmount,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Save Amount',
+              ),
+            ),
+            const Text('Lets Start Saving!',),
             SizedBox(
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
                 child: const Text('Save'),
-                onPressed: save5,
+                onPressed: (){
+                  double i=double.parse(saveAmount.text);
+                  save5(i);
+                }
               ),
             ),
-            Text('Savings: \$${globals.savings}')
+            Text('Savings: ${globals.savings}')
           ],
         ),
       ),
@@ -162,34 +173,16 @@ class _EarningsState extends State<Earnings>{
         child: Column(
           children: <Widget>[
             const Text('',),
-            const Text('Lets Earn Some Money!', style: TextStyle(fontSize: 20.0)),
+            const Text('Lets Start Saving!',),
             SizedBox(
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$5    Take Out The Trash'),
+                child: const Text('Take Out The Trash'),
                 onPressed: earn5,
               ),
             ),
-            const Text('',),
-            SizedBox(
-              width: 400.0,
-              height: 100.0,
-              child: ElevatedButton(
-                child: const Text('\$5    Mop the Floor'),
-                onPressed: earn5,
-              ),
-            ),
-            const Text('',),
-            SizedBox(
-              width: 400.0,
-              height: 100.0,
-              child: ElevatedButton(
-                child: const Text('\$5    Do Something'),
-                onPressed: earn5,
-              ),
-            ),
-            Text('Earned:\$${globals.wallet}')
+            Text('Earned: ${globals.wallet}')
           ],
         ),
       ),
@@ -208,7 +201,7 @@ class _SpendingState extends State<Spending>{
   Widget build (BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Earnings"),
+        title: const Text("Spending"),
         automaticallyImplyLeading: false,
         leading: Builder(
           builder: (BuildContext context) {
@@ -221,15 +214,7 @@ class _SpendingState extends State<Spending>{
           },
         ),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const Text('',),
-            const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
-            Text('Earned:\$${globals.wallet}')
-          ],
-        ),
-      ),
+      body: const Text("Rewards!"),
     );
   }
 }
