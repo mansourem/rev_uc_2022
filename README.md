@@ -1,16 +1,16 @@
-# rev_uc_2022
+# Money Learn, Money Earn
+Teaching kids good money habits from a young age.
 
-learn good money habits
+## Inspiration
 
-## Getting Started
+## What it does
 
-This project is a starting point for a Flutter application.
+## How we built it
 
-A few resources to get you started if this is your first Flutter project:
+## Challenges we ran into
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Accomplishments that we're proud of
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## What we learned
+
+## What's next for Money Learn, Money Earn

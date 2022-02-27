@@ -11,7 +11,7 @@ void main() {
       '/second': (context) => const Savings(),
       '/third': (context) => const Earnings(),
       '/fourth': (context) => const Spending(),
-      '/fifth':(context) => const Info(),
+      '/fifth':(context) => Info(),
     },
   ));
 
@@ -30,6 +30,7 @@ class _HomeRouteState extends State<HomeRoute>{
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
@@ -46,19 +47,7 @@ class _HomeRouteState extends State<HomeRoute>{
               width: 400.0,
               height: 200.0,
               child: ElevatedButton(
-                child: const Text('Savings'),
-                onPressed: () {
-                  Navigator.pushNamed(context,'/second');
-                },
-              ),
-            ),
-            const Text('',),
-
-            SizedBox(
-              width: 400.0,
-              height: 200.0,
-              child: ElevatedButton(
-                child: const Text('Earnings'),
+                child: const Text('Checking Account', style: TextStyle(fontSize: 24.0),),
                 onPressed: () {
                   Navigator.pushNamed(context,'/third');
                 },
@@ -70,7 +59,19 @@ class _HomeRouteState extends State<HomeRoute>{
               width: 400.0,
               height: 200.0,
               child: ElevatedButton(
-                child: const Text('Spending'),
+                child: const Text('Savings Account', style: TextStyle(fontSize: 24.0),),
+                onPressed: () {
+                  Navigator.pushNamed(context,'/second');
+                },
+              ),
+            ),
+            const Text('',),
+
+            SizedBox(
+              width: 400.0,
+              height: 200.0,
+              child: ElevatedButton(
+                child: const Text('Spend', style: TextStyle(fontSize: 24.0),),
                 onPressed: () {
                   Navigator.pushNamed(context,'/fourth');
                 },
@@ -136,7 +137,7 @@ class _SavingsState extends State<Savings>{
   Widget build (BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Savings"),
+        title: const Text("Savings Account"),
         automaticallyImplyLeading: false,
         leading: Builder(
           builder: (BuildContext context) {
@@ -153,7 +154,12 @@ class _SavingsState extends State<Savings>{
         child: Column(
           children: <Widget>[
             const Text('',),
-            TextField(
+            const Text('Let\'s Start Saving!', style: TextStyle(fontSize: 20.0)),
+            const Text('',),
+            SizedBox(
+              width:400.0,
+              height:50.0,
+              child: TextField(
               keyboardType: TextInputType.number,
               controller: saveAmount,
               decoration: const InputDecoration(
@@ -161,13 +167,12 @@ class _SavingsState extends State<Savings>{
                 labelText: 'Save Amount',
               ),
             ),
-            const Text('',),
-            const Text('Let\'s Start Saving!', style: TextStyle(fontSize: 20.0)),
+            ),
             SizedBox(
               width: 400.0,
-              height: 100.0,
+              height: 30.0,
               child: ElevatedButton(
-                child: const Text('Save'),
+                child: const Text('Save',style: TextStyle(fontSize: 16.0),),
                 onPressed: (){
                   double i=double.parse(saveAmount.text);
                   save(i);
@@ -207,7 +212,7 @@ class _EarningsState extends State<Earnings>{
   Widget build (BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Earnings"),
+        title: const Text("Checking Account"),
         automaticallyImplyLeading: false,
         leading: Builder(
           builder: (BuildContext context) {
@@ -225,13 +230,14 @@ class _EarningsState extends State<Earnings>{
           children: <Widget>[
             const Text('',),
             const Text('Let\'s Earn Some Money!', style: TextStyle(fontSize: 20.0)),
+            const Text('',),
             SizedBox(
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$5    Take Out The Trash'),
+                child: const Text('Take Out The Trash - \$2.5',style: TextStyle(fontSize:24.0),),
                 onPressed: (){
-                  earn(5);}
+                  earn(2.5);}
               ),
             ),
             const Text('',),
@@ -239,7 +245,7 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$10    Mop the Floor'),
+                child: const Text('Clean Your Room - \$10',style: TextStyle(fontSize:24.0),),
                 onPressed: () {
                   earn(10);}
               ),
@@ -249,9 +255,9 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('\$2.50    Chore 3'),
+                child: const Text('Do the Dishes - \$5',style: TextStyle(fontSize:24.0),),
                 onPressed: (){
-                  earn(2.5);}
+                  earn(5);}
               ),
             ),
             const Text(''),
@@ -313,7 +319,7 @@ class _SpendingState extends State<Spending>{
             width: 400.0,
             height: 100.0,
             child: ElevatedButton(
-              child: const Text('TV Time! - \$5'),
+              child: const Text('TV Time! - \$5', style: TextStyle(fontSize: 24.0)),
                 onPressed: (){
                   spend(5);
                 },
@@ -324,7 +330,7 @@ class _SpendingState extends State<Spending>{
             width: 400.0,
             height: 100.0,
             child: ElevatedButton(
-              child: const Text('Dessert Treat! - \$10'),
+              child: const Text('Sweet Treat! - \$10', style:TextStyle(fontSize: 24.0)),
               onPressed: (){
                 spend(10);
               },
@@ -340,15 +346,8 @@ class _SpendingState extends State<Spending>{
   }
 }
 
-class Info extends StatefulWidget{
-  const Info({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState(){
-    return _InfoState();
-  }
-}
-class _InfoState extends State<Info>{
+// ignore: use_key_in_widget_constructors
+class Info extends StatelessWidget{
   @override
   Widget build (BuildContext context) {
     return Scaffold(
@@ -370,21 +369,24 @@ class _InfoState extends State<Info>{
         child: Column(
           children: <Widget>[
             const Text('',),
-            const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
-            Text('Earned: \$${globals.wallet}'),
-
-            Expanded(child: Text(heading1, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child: Text(heading1_body1, style: const TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.ellipsis,),),
-            Expanded(child: Text(heading2, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child: Text(heading2_body1, style: const TextStyle(fontSize: 20, ),maxLines: 4, overflow: TextOverflow.clip,),),
-            Expanded(child:Text(heading2_body2, style: const TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading2_body3, style: const TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading3, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading3_body1, style: const TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading4, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading4_body1, style: const TextStyle(fontSize: 20, ),),),
-            Expanded(child:Text(heading5, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
-            Expanded(child:Text(heading5_body1, style: const TextStyle(fontSize: 20, ),),)
+            Text(heading1, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(heading1_body1, style: const TextStyle(fontSize: 14, ),),
+            const Text('',),
+            const Text('',),
+            Text(heading2, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(heading2_body1, style: const TextStyle(fontSize: 14, ),),
+            const Text('',),
+            const Text('',),
+            Text(heading3, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(heading3_body1, style: const TextStyle(fontSize: 14,),),
+            const Text('',),
+            const Text('',),
+            Text(heading4, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(heading4_body1, style: const TextStyle(fontSize: 14,),),
+            const Text('',),
+            const Text('',),
+            Text(heading5, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(heading5_body1, style: const TextStyle(fontSize: 14,),)
           ],
         ),
       ),
