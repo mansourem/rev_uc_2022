@@ -16,6 +16,7 @@ void main() async{
     initialRoute: '/',
     routes:{
       '/': (context) => LoginPage(),
+      '/home': (context) => HomeRoute(),
       '/second': (context) => Savings(),
       '/third': (context) => Earnings(),
       '/fourth': (context) => Spending(),
