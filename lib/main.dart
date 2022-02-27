@@ -85,11 +85,12 @@ class Savings extends StatefulWidget{
 }
 
 class _SavingsState extends State<Savings>{
-  void save5() {
+  save5(value) {
     setState(() {
-      globals.savings+=5;
+      globals.savings+=value;
     });
   }
+  TextEditingController saveAmount = TextEditingController();
   @override
   Widget build (BuildContext context){
     return Scaffold(
@@ -111,13 +112,24 @@ class _SavingsState extends State<Savings>{
         child: Column(
           children: <Widget>[
             const Text('',),
+            TextField(
+              keyboardType: TextInputType.number,
+              controller: saveAmount,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Save Amount',
+              ),
+            ),
             const Text('Lets Start Saving!',),
             SizedBox(
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
                 child: const Text('Save'),
-                onPressed: save5,
+                onPressed: (){
+                  double i=double.parse(saveAmount.text);
+                  save5(i);
+                }
               ),
             ),
             Text('Savings: ${globals.savings}')
