@@ -10,6 +10,7 @@ void main() {
       '/second': (context) => Savings(),
       '/third': (context) => Earnings(),
       '/fourth': (context) => Spending(),
+      '/fifth':(context) => Info(),
     },
   ));
 
@@ -30,9 +31,17 @@ class _HomeRouteState extends State<HomeRoute>{
         title: const Text("Home"),
         backgroundColor: Colors.blue,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed:() {
+          Navigator.pushNamed(context,'/fifth');
+        },
+        child: const Icon(Icons.info_outline),
+
+      ), // This trailing comma makes auto-formatting nicer for build methods.
       body: Center(
         child: Column(
           children: <Widget>[
+
             const Text('',),
             SizedBox(
               width: 400.0,
@@ -235,14 +244,55 @@ class _SpendingState extends State<Spending>{
         ),
       ),
     body: Center(
+
     child: Column(
     children: <Widget>[
     const Text('',),
     const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
+
     Text('Earned: \$${globals.wallet}')
     ],
     ),
     ),
+    );
+  }
+}
+
+class Info extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState(){
+    return _InfoState();
+  }
+}
+class _InfoState extends State<Info>{
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Info"),
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamed(context,'/');
+              },
+            );
+          },
+        ),
+      ),
+      body: Center(
+
+        child: Column(
+          children: <Widget>[
+            const Text('',),
+            const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
+
+            Text('Earned: \$${globals.wallet}')
+          ],
+        ),
+      ),
     );
   }
 }
