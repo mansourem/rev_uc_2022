@@ -127,7 +127,7 @@ class _SavingsState extends State<Savings>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -189,7 +189,7 @@ class _EarningsState extends State<Earnings>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -265,7 +265,7 @@ class _SpendingState extends State<Spending>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
@@ -315,7 +315,7 @@ class _InfoState extends State<Info>{
             return IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushNamed(context,'/');
+                Navigator.pushNamed(context,'/home');
               },
             );
           },
