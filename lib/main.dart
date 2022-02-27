@@ -1,9 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'global_wallet.dart' as globals;
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes:{
       '/': (context) => HomeRoute(),
@@ -12,16 +12,17 @@ void main() {
       '/fourth': (context) => Spending(),
     },
   ));
+
 }
 
-double amount(double wallet, double value){
-  double wallet=0;
-  wallet+=value;
-  return wallet;
-}
 
-class HomeRoute extends StatelessWidget {
-  const HomeRoute({Key? key}) : super(key: key);
+class HomeRoute extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState(){
+    return _HomeRouteState();
+  }
+}
+class _HomeRouteState extends State<HomeRoute>{
   @override
   Widget build (BuildContext context){
     return Scaffold(
@@ -67,7 +68,8 @@ class HomeRoute extends StatelessWidget {
                 },
               ),
             ),
-
+            Text('Amount Earned: ${globals.wallet}'),
+            Text('Amount Saved: ${globals.savings}')
           ],
         ),
       ),
@@ -83,13 +85,45 @@ class Savings extends StatefulWidget{
 }
 
 class _SavingsState extends State<Savings>{
+  void save5() {
+    setState(() {
+      globals.savings+=5;
+    });
+  }
   @override
   Widget build (BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: const Text("Savings"),
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamed(context,'/');
+              },
+            );
+          },
+        ),
       ),
-      body: const Text("Your Savings: "),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Text('',),
+            const Text('Lets Start Saving!',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('Save'),
+                onPressed: save5,
+              ),
+            ),
+            Text('Savings: ${globals.savings}')
+          ],
+        ),
+      ),
     );
   }
 }
@@ -101,13 +135,45 @@ class Earnings extends StatefulWidget{
 }
 
 class _EarningsState extends State<Earnings>{
+  void earn5() {
+    setState(() {
+      globals.wallet+=5;
+    });
+  }
   @override
   Widget build (BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: const Text("Earnings"),
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamed(context,'/');
+              },
+            );
+          },
+        ),
       ),
-      body: const Text("Let's Earn!"),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Text('',),
+            const Text('Lets Start Saving!',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('Take Out The Trash'),
+                onPressed: earn5,
+              ),
+            ),
+            Text('Earned: ${globals.wallet}')
+          ],
+        ),
+      ),
     );
   }
 }
@@ -124,6 +190,17 @@ class _SpendingState extends State<Spending>{
     return Scaffold(
       appBar: AppBar(
         title: const Text("Spending"),
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamed(context,'/');
+              },
+            );
+          },
+        ),
       ),
       body: const Text("Rewards!"),
     );
