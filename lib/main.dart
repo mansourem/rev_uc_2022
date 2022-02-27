@@ -1,13 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:parent_kids_finance/auth.dart';
+import 'firebase_options.dart';
 import 'global_wallet.dart' as globals;
 import 'info_text.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  print('-- WidgetsFlutterBinding.ensureInitialized');
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  print('-- main: Firebase.initializeApp');
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes:{
-      '/': (context) => const HomeRoute(),
+      '/': (context) => LoginPage(),
       '/second': (context) => const Savings(),
       '/third': (context) => const Earnings(),
       '/fourth': (context) => const Spending(),
@@ -98,7 +106,7 @@ Widget _buildPopupDialog(BuildContext context, value) {
       ],
     ),
     actions: <Widget>[
-       TextButton(
+      TextButton(
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -160,23 +168,23 @@ class _SavingsState extends State<Savings>{
               width:400.0,
               height:50.0,
               child: TextField(
-              keyboardType: TextInputType.number,
-              controller: saveAmount,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Save Amount',
+                keyboardType: TextInputType.number,
+                controller: saveAmount,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Save Amount',
+                ),
               ),
-            ),
             ),
             SizedBox(
               width: 400.0,
               height: 30.0,
               child: ElevatedButton(
-                child: const Text('Save',style: TextStyle(fontSize: 16.0),),
-                onPressed: (){
-                  double i=double.parse(saveAmount.text);
-                  save(i);
-                }
+                  child: const Text('Save',style: TextStyle(fontSize: 16.0),),
+                  onPressed: (){
+                    double i=double.parse(saveAmount.text);
+                    save(i);
+                  }
               ),
             ),
             const Text(''),
@@ -202,7 +210,7 @@ class _EarningsState extends State<Earnings>{
     setState(() {
       globals.wallet+=value;
     },
-  );
+    );
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildPopupDialog(context,value),
@@ -235,9 +243,9 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('Take Out The Trash - \$2.5',style: TextStyle(fontSize:24.0),),
-                onPressed: (){
-                  earn(2.5);}
+                  child: const Text('Take Out The Trash - \$2.5',style: TextStyle(fontSize:24.0),),
+                  onPressed: (){
+                    earn(2.5);}
               ),
             ),
             const Text('',),
@@ -245,9 +253,9 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('Clean Your Room - \$10',style: TextStyle(fontSize:24.0),),
-                onPressed: () {
-                  earn(10);}
+                  child: const Text('Clean Your Room - \$10',style: TextStyle(fontSize:24.0),),
+                  onPressed: () {
+                    earn(10);}
               ),
             ),
             const Text('',),
@@ -255,9 +263,9 @@ class _EarningsState extends State<Earnings>{
               width: 400.0,
               height: 100.0,
               child: ElevatedButton(
-                child: const Text('Do the Dishes - \$5',style: TextStyle(fontSize:24.0),),
-                onPressed: (){
-                  earn(5);}
+                  child: const Text('Do the Dishes - \$5',style: TextStyle(fontSize:24.0),),
+                  onPressed: (){
+                    earn(5);}
               ),
             ),
             const Text(''),
@@ -309,39 +317,39 @@ class _SpendingState extends State<Spending>{
           },
         ),
       ),
-    body: Center(
-      child: Column(
-        children: <Widget>[
-          const Text('',),
-          const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
-          const Text('',),
-          SizedBox(
-            width: 400.0,
-            height: 100.0,
-            child: ElevatedButton(
-              child: const Text('TV Time! - \$5', style: TextStyle(fontSize: 24.0)),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Text('',),
+            const Text('Rewards!', style: TextStyle(fontSize: 20.0)),
+            const Text('',),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('TV Time! - \$5', style: TextStyle(fontSize: 24.0)),
                 onPressed: (){
                   spend(5);
                 },
+              ),
             ),
-          ),
-          const Text(''),
-          SizedBox(
-            width: 400.0,
-            height: 100.0,
-            child: ElevatedButton(
-              child: const Text('Sweet Treat! - \$10', style:TextStyle(fontSize: 24.0)),
-              onPressed: (){
-                spend(10);
-              },
+            const Text(''),
+            SizedBox(
+              width: 400.0,
+              height: 100.0,
+              child: ElevatedButton(
+                child: const Text('Sweet Treat! - \$10', style:TextStyle(fontSize: 24.0)),
+                onPressed: (){
+                  spend(10);
+                },
+              ),
             ),
-          ),
-          const Text(''),
-          Text('Amount Earned: \$${globals.wallet}', style: const TextStyle(fontSize: 24.0)),
-          Text('Amount Saved: \$${globals.savings}', style: const TextStyle(fontSize: 24.0))
-        ],
+            const Text(''),
+            Text('Amount Earned: \$${globals.wallet}', style: const TextStyle(fontSize: 24.0)),
+            Text('Amount Saved: \$${globals.savings}', style: const TextStyle(fontSize: 24.0))
+          ],
+        ),
       ),
-    ),
     );
   }
 }
